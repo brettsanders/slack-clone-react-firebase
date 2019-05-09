@@ -6,7 +6,10 @@ function Messages() {
 
   useEffect(() => {
     return db
-      .collection('channels').doc('random').collection('messages')
+      .collection('channels')
+      .doc('random')
+      .collection('messages')
+      .orderBy('createdAt')
       .onSnapshot((snapshot) => {
         const messages = [];
 
@@ -16,8 +19,9 @@ function Messages() {
             id: message.id
           });
         });
+
         setMessages(messages);
-        console.log(messages);
+
       });
   }, []);
 
