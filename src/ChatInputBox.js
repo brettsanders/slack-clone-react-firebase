@@ -7,11 +7,20 @@ function ChatInputBox() {
       onSubmit={event => {
         event.preventDefault();
         const value = event.target.elements[0].value;
+        db
+          .collection('channels')
+          .doc('random')
+          .collection('messages')
+          .add({
+            text: value,
+            createdAt: new Date()
+          })
         console.log(value);
+        event.target.reset();
       }}
       className="ChatInputBox"
     >
-      <input name="foo" className="ChatInput" placeholder="Message #general" />
+      <input className="ChatInput" placeholder="Message #general" />
     </form>
   );
 }
