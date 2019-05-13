@@ -1,17 +1,28 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/auth';
 
+// const config = {
+//   projectId: 'chat-app-brett',
+
+//   apiKey: 'IzaSyDzhpRRBLoCw3TY74X3JZc6r7hthavineA',
+//   authDomain: 'chat-app-brett.firebaseapp.com',
+//   databaseURL: 'https://chat-app-brett.firebaseio.com',
+//   storageBucket: 'chat-app-brett.appspot.com',
+//   messagingSenderId: '968634074728',
+// };
 const config = {
-  apiKey: "AIzaSyAe3BVC_iZ4xlyFHtnyDDjrUl0rCMXQd2g",
-  authDomain: "chat-app-brett.firebaseapp.com",
-  databaseURL: "https://chat-app-brett.firebaseio.com",
-  projectId: "chat-app-brett",
-  storageBucket: "chat-app-brett.appspot.com",
-  messagingSenderId: "968634074728"
-};
+    apiKey: "AIzaSyDzhpRRBLoCw3TY74X3JZc6r7hthavineA",
+    authDomain: "chat-app-brett.firebaseapp.com",
+    databaseURL: "https://chat-app-brett.firebaseio.com",
+    projectId: "chat-app-brett",
+    storageBucket: "chat-app-brett.appspot.com",
+    messagingSenderId: "968634074728",
+    appId: "1:968634074728:web:a289b1c4547756ff"
+  };
 
 firebase.initializeApp(config);
 
 const db = firebase.firestore();
 
-export { db };
+export {db, firebase};
