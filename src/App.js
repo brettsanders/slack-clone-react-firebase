@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Nav from './Nav';
 import Channel from './Channel';
 import {firebase} from './firebase';
@@ -6,23 +6,27 @@ import {firebase} from './firebase';
 function App() {
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    return firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        setUser({
+          displayName: user.displayName,
+          photoUrl: user.photoURL,
+          uid: user.uid
+        });
+      } else {
+        setUser(null);
+      }
+      console.log(user)
+    });
+  }, []);
+
   const handleSignIn = () => {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    // provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-    // provider.setCustomParameters({
-    //   login_hint: 'user@example.com',
-    // });
+    const provider = new firebase.auth.GoogleAuthProvider();
 
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        // ...
-      })
       .catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -32,16 +36,16 @@ function App() {
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
         // ...
-        console.log(errorCode)
-        console.log(errorMessage)
-        console.log(email)
-        console.log(credential)
+        console.log(errorCode);
+        console.log(errorMessage);
+        console.log(email);
+        console.log(credential);
       });
   };
 
-  return false ? (
+  return user ? (
     <div className="App">
-      <Nav />
+      <Nav user={user} />
       <Channel />
     </div>
   ) : (

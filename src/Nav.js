@@ -1,7 +1,7 @@
 import React from 'react';
 import useCollection from './useCollection'
 
-function Nav() {
+function Nav({ user }) {
   const channels = useCollection('channels')
 
   return (
@@ -10,10 +10,10 @@ function Nav() {
         <img
           className="UserImage"
           alt="whatever"
-          src="https://placekitten.com/64/64"
+          src={user.photoUrl}
         />
         <div>
-          <div>Ryan Florence</div>
+          <div>{user.displayName}</div>
           <div>
             <button className="text-button">log out</button>
           </div>

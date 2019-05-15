@@ -2,15 +2,6 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-// const config = {
-//   projectId: 'chat-app-brett',
-
-//   apiKey: 'IzaSyDzhpRRBLoCw3TY74X3JZc6r7hthavineA',
-//   authDomain: 'chat-app-brett.firebaseapp.com',
-//   databaseURL: 'https://chat-app-brett.firebaseio.com',
-//   storageBucket: 'chat-app-brett.appspot.com',
-//   messagingSenderId: '968634074728',
-// };
 const config = {
     apiKey: "AIzaSyDzhpRRBLoCw3TY74X3JZc6r7hthavineA",
     authDomain: "chat-app-brett.firebaseapp.com",
