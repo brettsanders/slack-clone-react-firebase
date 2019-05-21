@@ -5,11 +5,10 @@ import {firebase, db} from './firebase';
 
 function App() {
   const user = useAuth();
-
   return user ? (
     <div className="App">
       <Nav user={user} />
-      <Channel />
+      <Channel user={user} />
     </div>
   ) : (
     <Login />
