@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Nav from './Nav';
 import Channel from './Channel';
 import {firebase, db} from './firebase';
+import { Router } from '@reach/router'
 
 function App() {
   const user = useAuth();
