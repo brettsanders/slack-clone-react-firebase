@@ -1,24 +1,24 @@
 import React from 'react';
-import useCollection from './useCollection'
-import { firebase } from './firebase'
+import useCollection from './useCollection';
+import {firebase} from './firebase';
 
-function Nav({ user }) {
-  const channels = useCollection('channels')
+function Nav({user}) {
+  const channels = useCollection('channels');
 
   return (
     <div className="Nav">
       <div className="User">
-        <img
-          className="UserImage"
-          alt="whatever"
-          src={user.photoUrl}
-        />
+        <img className="UserImage" alt="whatever" src={user.photoUrl} />
         <div>
           <div>{user.displayName}</div>
           <div>
-            <button onClick={() => {
-              firebase.auth().signOut()
-             }} className="text-button">log out</button>
+            <button
+              onClick={() => {
+                firebase.auth().signOut();
+              }}
+              className="text-button">
+              log out
+            </button>
           </div>
         </div>
       </div>
