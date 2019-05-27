@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import useCollection from './useCollection';
-import { db } from './firebase'
+import {db} from './firebase';
 
-function Messages({ channelId }) {
-  const messages = useCollection(
-    `channels/${channelId}/messages`,
-    'createdAt');
+function Messages({channelId}) {
+  const messages = useCollection(`channels/${channelId}/messages`, 'createdAt');
 
   return (
     <div className="Messages">
@@ -16,7 +14,11 @@ function Messages({ channelId }) {
         const showDay = false;
         const showAvatar = !previous || message.user.id !== previous.user.id;
         return showAvatar ? (
-          <FirstMessageFromUser key={message.id} message={message} showDay={showDay} />
+          <FirstMessageFromUser
+            key={message.id}
+            message={message}
+            showDay={showDay}
+          />
         ) : (
           <div key={message.id}>
             <div className="Message no-avatar">
@@ -30,18 +32,18 @@ function Messages({ channelId }) {
 }
 
 function useDoc(path) {
-  const [doc, setDoc] = useState()
+  const [doc, setDoc] = useState();
 
   useEffect(() => {
-    db.doc(path).onSnapshot(doc => {
+    return db.doc(path).onSnapshot(doc => {
       setDoc({
         ...doc.data(),
-        id: doc.id
-      })
-    })
-  })
+        id: doc.id,
+      });
+    });
+  }, [path]);
 
-  return doc
+  return doc;
 }
 
 function FirstMessageFromUser({message, showDay}) {
@@ -56,17 +58,15 @@ function FirstMessageFromUser({message, showDay}) {
         </div>
       )}
       <div className="Message with-avatar">
-        <div className="Avatar"
+        <div
+          className="Avatar"
           style={{
-            backgroundImage: author
-            ? `url("${author.photoUrl}")`
-            : ''
-          }}/>
+            backgroundImage: author ? `url("${author.photoUrl}")` : '',
+          }}
+        />
         <div className="Author">
           <div>
-            <span className="UserName">
-              { author && author.displayName }
-            </span>{" "}
+            <span className="UserName">{author && author.displayName}</span>{' '}
             <span className="TimeStamp">
               {new Date(message.createdAt.seconds).toString()}
             </span>
