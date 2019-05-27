@@ -44,9 +44,7 @@ function useDoc(path) {
 
     let stillMounted = true;
 
-    const pending = pendingCache[path];
-
-    const promise = pending || (pendingCache[path] = db.doc(path).get());
+    const promise = pendingCache[path] || (pendingCache[path] = db.doc(path).get());
 
     promise.then(doc => {
       if (stillMounted) {
