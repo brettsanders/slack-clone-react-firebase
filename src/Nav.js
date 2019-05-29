@@ -6,21 +6,21 @@ import {Link} from '@reach/router';
 function Nav({user}) {
   const channels = useCollection('channels');
 
-  return (
-    <div className="Nav">
-      <div className="User">
-        <img className="UserImage" alt="whatever" src={user.photoUrl} />
-        <div>
-          <div>{user.displayName}</div>
+    return (
+      <div className="Nav">
+        <div className="User">
+          <img className="UserImage" alt="whatever" src={user.photoUrl} />
           <div>
-            <button
-              onClick={() => {
-                firebase.auth().signOut();
-              }}
-              className="text-button">
-              log out
-            </button>
-          </div>
+            <div>{user.displayName}</div>
+            <div>
+              <button
+                onClick={() => {
+                  firebase.auth().signOut();
+                }}
+                className="text-button">
+                log out
+              </button>
+            </div>
         </div>
       </div>
       <nav className="ChannelNav">

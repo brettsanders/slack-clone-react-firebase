@@ -12,7 +12,7 @@ function App() {
       <Nav user={user} />
       <Router>
         <Channel path="channel/:channelId" user={user} />
-        <Redirect from="/" to="channel/general" />
+        <Redirect noThrow from="/" to="channel/general" />
       </Router>
     </div>
   ) : (
@@ -57,15 +57,15 @@ function useAuth() {
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
-        const user = {
+        const u = {
           displayName: firebaseUser.displayName,
           photoUrl: firebaseUser.photoURL,
           uid: firebaseUser.uid,
         };
-        setUser(user);
+        setUser(u);
         db.collection('users')
-          .doc(user.uid)
-          .set(user, {merge: true});
+          .doc(u.uid)
+          .set(u, {merge: true});
       } else {
         setUser(null);
       }
