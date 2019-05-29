@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Nav from './Nav';
 import Channel from './Channel';
-import {firebase, db} from './firebase';
+import {firebase, db, setupPresence } from './firebase';
 import { Router, Redirect  } from '@reach/router'
 
 function App() {
@@ -62,10 +62,14 @@ function useAuth() {
           photoUrl: firebaseUser.photoURL,
           uid: firebaseUser.uid,
         };
+
         setUser(u);
+
         db.collection('users')
           .doc(u.uid)
           .set(u, {merge: true});
+
+        setupPresence(u);
       } else {
         setUser(null);
       }
